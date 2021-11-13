@@ -44,12 +44,12 @@ class StoreProductController extends Controller
 
         $importForm = new StoreImportForm();
         if ($importForm->load(\Yii::$app->request->post()) && $importForm->validate()) {
-            $importForm->fileMove('file', 'store-file');
+            $importForm->fileMove('file', $fileName = 'store-file-' . time());
 
             $jobData = [
                 'extension' => $importForm->_file->getExtension(),
                 'store_id' => $importForm->store_id,
-                'fileName' => 'store-file',
+                'fileName' => $fileName,
             ];
 
             ImportProductJob::saveLog($importForm->store_id, ImportProductJob::STATUS_NEW, $jobData);
