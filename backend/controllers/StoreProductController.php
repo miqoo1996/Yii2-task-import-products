@@ -44,7 +44,7 @@ class StoreProductController extends Controller
 
         $importForm = new StoreImportForm();
         if ($importForm->load(\Yii::$app->request->post()) && $importForm->validate()) {
-            $importForm->fileMove('file', $fileName = 'store-file-' . time());
+            $importForm->fileMove('file', $fileName = 'store-file-' . uniqid() . time());
 
             $jobData = [
                 'extension' => $importForm->_file->getExtension(),
